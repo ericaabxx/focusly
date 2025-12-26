@@ -21,5 +21,21 @@ export const styles = StyleSheet.create({
         fontFamily: fonts.family.regular,
         fontSize: fonts.size.sm,
         color: colors.background
+    },
+    img: {
+        width: 32,
+        height: 32,
+    },
+
+    text: {
+        color: "#ffff"
+    },
+    iconText: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        gap: spacing.xs,
+        marginBottom: spacing.xl,
+
     }
 })
