@@ -8,7 +8,9 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "flex-start",
         paddingLeft: spacing.huge,
-        paddingTop: spacing.huge
+        paddingTop: spacing.huge,
+        borderBottomEndRadius: spacing.huge,
+        borderBottomStartRadius: spacing.huge
     },
 
     title:{
