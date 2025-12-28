@@ -1,7 +1,14 @@
-import {Home} from "./src/screens/Home"
+import { NavigationContainer } from "@react-navigation/native";
+import { StackRoutes } from './src/routes/stack.routes';
+import { TaskProvider } from "./src/contexts/TaskContext";
 
 export default function App() {
   return (
-   <Home />
+  <TaskProvider>
+    <NavigationContainer>
+        <StackRoutes />
+    </NavigationContainer>
+  </TaskProvider>
+
   );
 }

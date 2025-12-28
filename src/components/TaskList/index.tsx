@@ -14,16 +14,20 @@ export const TaskList: React.FC<TaskListProps> = ({tasks}) => {
             <Text style={styles.header}>Suas Tarefas</Text>
 
             <FlatList
-            data={tasks}
-            keyExtractor={(item) => item.id}
-            renderItem={({item}) => (
-                <TaskItem
-                title={item.title}
-                category={item.category} />
-            )} 
-            contentContainerStyle={styles.listContent}
-            showsHorizontalScrollIndicator={false}
-            />
+  data={tasks}
+  keyExtractor={(item) => item.id}
+  renderItem={({ item }) => (
+    <TaskItem
+      id={item.id}
+      title={item.title}
+      category={item.category}
+      completed={item.completed}
+    />
+  )}
+  contentContainerStyle={styles.listContent}
+  showsVerticalScrollIndicator={false}
+/>
+
         </View>
     );
 };

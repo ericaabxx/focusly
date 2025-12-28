@@ -1,37 +1,62 @@
+import { Header } from "../../components/Header";
+import ProgressCard from "../../components/DailyProgress";
+import CategoryList from "../../components/CategoryList";
+import TaskList from "../../components/TaskList";
+import { FloatingButton } from "../../components/FloatingButton";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../../routes/types";
+import { useTasks } from "../../contexts/TaskContext";
+import { useState } from "react";
+import { Category } from "../../types";
 import { styles } from './styles';
-import { Header } from '../../components/Header';
-import ProgressCard from '../../components/DailyProgress';
-import CategoryList from '../../components/CategoryList';
-import TaskList from '../../components/TaskList';
-import { FloatingButton } from '../../components/FloatingButton';
+import { View } from "react-native";
+
+type HomeNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "Home"
+>;
 
 export function Home() {
+  const navigation = useNavigation<HomeNavigationProp>();
+  const { tasks } = useTasks();
 
-    const tasks = [
-  {
-    id: "1",
-    title: "Arrumar a casa",
-    category: { id: "1", nome: "Pessoal", cor: "#f5a623" },
-    completed: false,
-  },
-  {
-    id: "2",
-    title: "Estudar React Native",
-    category: { id: "2", nome: "Estudos", cor: "#4a90e2" },
-    completed: false,
-  },
-];
-    return (
-  <>
-    <Header 
-      userName="Erica"
-      pendingTask={4}
-    />
-    <ProgressCard completed={4} total={6} />
-    <CategoryList />
-    <TaskList tasks={tasks} />
-    <FloatingButton onPress={() => console.log("Abrir Modal")} />
-  </>
-);
+  const [selectedCategory, setSelectedCategory] =
+    useState<Category | null>(null);
 
+  const filteredTasks = selectedCategory
+    ? tasks.filter(
+        task => task.category.id === selectedCategory.id
+      )
+    : tasks;
+
+  const totalTasks = tasks.length;
+  const completedTasks = tasks.filter(
+    task => task.completed
+  ).length;
+  const pendingTasks = totalTasks - completedTasks;
+
+  return (
+    <>
+      <Header pendingTask={pendingTasks} />
+
+      <ProgressCard
+        completed={completedTasks}
+        total={totalTasks}
+      />
+      <View style={styles.container}>
+      <CategoryList
+    selectedCategoryId={selectedCategory?.id ?? null}
+    onSelectCategory={setSelectedCategory}
+    showAllOption
+/>
+      </View>
+
+      <TaskList tasks={filteredTasks} />
+
+      <FloatingButton
+        onPress={() => navigation.navigate("AddTask")}
+      />
+    </>
+  );
 }

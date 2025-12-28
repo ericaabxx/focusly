@@ -1,21 +1,14 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { styles } from "./styles";
+import { Ionicons } from "@expo/vector-icons";
 
+type FloatingButtonProps = TouchableOpacityProps;
 
-export interface FloatingButtonProps {
-    onPress: () => void;
-}
-
-export function FloatingButton({onPress}: FloatingButtonProps) {
-    return(
-        <TouchableOpacity  
-        style={styles.fab}
-        activeOpacity={0.7}
-        onPress={onPress}
-        >
-        <Ionicons name="add" size={32} color="white" />
-        </TouchableOpacity>
-    );
+export function FloatingButton({ ...rest }: FloatingButtonProps) {
+  return (
+    <TouchableOpacity style={styles.fab} {...rest}>
+      <Ionicons name="add" size={32} color="#FFF" />
+    </TouchableOpacity>
+  );
 }

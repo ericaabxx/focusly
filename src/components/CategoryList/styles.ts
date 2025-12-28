@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
+import { colors } from "../../styles";
 
 
 export const styles = StyleSheet.create({
     container: {
         marginVertical: 20,
-        paddingHorizontal: 15,
-        marginTop: 60
+        marginTop: 60,
     },
     sectionTitle: {
         fontSize: 18,
@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
         marginBottom: 10,
         color: "#000"
     },
+
     scroll: {
         flexDirection: "row"
     },
@@ -26,6 +27,10 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 8,
         marginRight: 10,
+    },
+    chipSelected: {
+    backgroundColor: "#e1e1e1bb",
+
     },
     dot: {
         width: 8,
